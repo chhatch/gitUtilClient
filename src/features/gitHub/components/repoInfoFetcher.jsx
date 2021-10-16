@@ -36,7 +36,7 @@ const Component = ({ getOpenPRsInfo }) => {
                     control={control}
                     render={() => (
                         <Form.Control
-                            placeholder="Enter GItHub Repository URL"
+                            placeholder="Enter GitHub Repository URL"
                             onChange={({ target: { value } }) =>
                                 onChangeField('url')(value)
                             }
