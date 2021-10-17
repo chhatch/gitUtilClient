@@ -26,7 +26,7 @@ const Component = ({ getOpenPRsInfo }) => {
         setValue(name, value)
     }
     const onSubmit = (data) => {
-        getOpenPRsInfo(data).catch((e) => console.error(e))
+        getOpenPRsInfo(data.url).catch((e) => console.error(e))
     }
 
     return (
