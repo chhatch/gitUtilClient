@@ -85,7 +85,7 @@ const Component = ({ error, getOpenPRsInfo, openPRs }) => {
                         {openPRs.map((pr) => (
                             <tr>
                                 <td>
-                                    <a href={pr.url}>{pr.title}</a>
+                                    <a href={pr.url} target='blank'>{pr.title}</a>
                                 </td>
                                 <td>{pr.numberOfCommits}</td>
                             </tr>
