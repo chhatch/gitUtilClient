@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Table from 'react-bootstrap/Table'
 import { getOpenPRsInfo } from '../thunks'
 
 const mapStateToProps = (state) => ({
@@ -58,11 +59,26 @@ const Component = ({ getOpenPRsInfo, openPRs }) => {
                 </Button>
             </Form>
             {openPRs.length > 0 && (
-                <div className='d-flex flex-column'>
+                 <Table striped bordered hover variant="">
+                 <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Commits</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {openPRs.map((pr) => (
+                        <tr>
+                        <td>
                         <a href={pr.url}>{pr.title}</a>
+                        </td>
+                        <td>
+                        {pr.numberOfCommits}
+                        </td>
+                        </tr>
                     ))}
-                </div>
+                </tbody>
+                </Table>
             )}
         </div>
     )
