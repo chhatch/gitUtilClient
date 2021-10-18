@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
@@ -27,8 +27,18 @@ const Component = ({ error, getOpenPRsInfo, openPRs }) => {
     const onChangeField = (name) => (value) => {
         setValue(name, value)
     }
+    const [loading, setLoading] = useState(false)
     const onSubmit = (data) => {
-        getOpenPRsInfo(data.url).catch((e) => console.error(e))
+        setLoading(true)
+        getOpenPRsInfo(data.url)
+            .catch((e) => console.error(e))
+            .finally((_) => setLoading(false))
+    }
+    if (loading) {
+        return (
+            <div class="spinner-border text-primary" role="status">
+            </div>
+        )
     }
 
     return (
@@ -60,7 +70,7 @@ const Component = ({ error, getOpenPRsInfo, openPRs }) => {
                     Go!
                 </Button>
             </Form>
-        
+
             {error && <h4 className="error text-danger mt-3">{error}</h4>}
 
             {openPRs.length > 0 && (
