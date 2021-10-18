@@ -31,14 +31,15 @@ const Component = ({ getOpenPRsInfo, openPRs }) => {
     }
 
     return (
-        <div>
-            <Form>
-                <Form.Group controlId="repoUrl">
+        <div className="w-100 d-flex flex-column align-items-center">
+            <Form className="d-flex flex-column align-items-center w-25">
+                <Form.Group controlId="repoUrl" className="w-100">
                     <Controller
                         control={control}
                         render={() => (
                             <Form.Control
                                 placeholder="Enter GitHub Repository URL"
+                                className="w-100"
                                 onChange={({ target: { value } }) =>
                                     onChangeField('url')(value)
                                 }
@@ -59,25 +60,23 @@ const Component = ({ getOpenPRsInfo, openPRs }) => {
                 </Button>
             </Form>
             {openPRs.length > 0 && (
-                 <Table striped bordered hover variant="">
-                 <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Commits</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {openPRs.map((pr) => (
+                <Table striped bordered hover className="w-50 mt-3">
+                    <thead>
                         <tr>
-                        <td>
-                        <a href={pr.url}>{pr.title}</a>
-                        </td>
-                        <td>
-                        {pr.numberOfCommits}
-                        </td>
+                            <th>Title</th>
+                            <th>Commits</th>
                         </tr>
-                    ))}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {openPRs.map((pr) => (
+                            <tr>
+                                <td>
+                                    <a href={pr.url}>{pr.title}</a>
+                                </td>
+                                <td>{pr.numberOfCommits}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </Table>
             )}
         </div>
