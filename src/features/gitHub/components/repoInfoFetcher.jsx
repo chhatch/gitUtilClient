@@ -9,13 +9,14 @@ import { getOpenPRsInfo } from '../thunks'
 const mapStateToProps = (state) => ({
     repoUrl: state.gitHub.repoUrl,
     openPRs: state.gitHub.openPRs,
+    error: state.gitHub.error,
 })
 
 const mapDispatchToProps = (dispatch) => ({
     getOpenPRsInfo: (repoUrl) => dispatch(getOpenPRsInfo(repoUrl)).unwrap(),
 })
 
-const Component = ({ getOpenPRsInfo, openPRs }) => {
+const Component = ({ error, getOpenPRsInfo, openPRs }) => {
     const {
         control,
         getValues,
@@ -59,6 +60,9 @@ const Component = ({ getOpenPRsInfo, openPRs }) => {
                     Go!
                 </Button>
             </Form>
+        
+            {error && <h4 className="error text-danger mt-3">{error}</h4>}
+
             {openPRs.length > 0 && (
                 <Table striped bordered hover className="w-50 mt-3">
                     <thead>
