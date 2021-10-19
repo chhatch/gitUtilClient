@@ -16,7 +16,8 @@ const mapDispatchToProps = (dispatch) => ({
     getOpenPRsInfo: (repoUrl) => dispatch(getOpenPRsInfo(repoUrl)).unwrap(),
 })
 
-const Component = ({ error, getOpenPRsInfo, openPRs }) => {
+//export unconnected component for ease of testing
+export const Component = ({ error, getOpenPRsInfo, openPRs }) => {
     const {
         control,
         getValues,
@@ -36,7 +37,7 @@ const Component = ({ error, getOpenPRsInfo, openPRs }) => {
     }
     if (loading) {
         return (
-            <div class="spinner-border text-primary" role="status">
+            <div className="spinner-border text-primary" role="status">
             </div>
         )
     }
@@ -82,8 +83,8 @@ const Component = ({ error, getOpenPRsInfo, openPRs }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {openPRs.map((pr) => (
-                            <tr>
+                        {openPRs.map((pr, index) => (
+                            <tr key={index}>
                                 <td>
                                     <a href={pr.url} target='blank'>{pr.title}</a>
                                 </td>
